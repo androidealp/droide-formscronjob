@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE extension>
+<extension version="3.0" type="plugin" group="system">
+	<name>Plugin System cronjob</name>
+	<version>0.1</version>
+	<creationDate>2018-08-27</creationDate>
+	<author>André Luiz</author>
+	<authorEmail>and4563@gmail.com</authorEmail>
+	<authorUrl>http://www.next4.com.br</authorUrl>
+	<copyright>www.next4.com.br</copyright>
+	<license>GNU/GPLv3 or later</license>
+	<description>
+		<![CDATA[
+			<p><strong>Envia um e-mail com o relatório de envios com período programado diário</strong></p>
+			<p>O sistema depende do plugin droide-forms_savedb para conseguir disparar, configure seu cron para index.php?cron_droideforms={key} o key é o key gerado em chave para disparo</p>
+			<p style="color:#ff0000"><strong>Atenção:</strong> Antes de desinstalar o plugin faça um backup da tabela #__droide_forms_cronjob, pois ela será removida com a ação</p>
+		]]>
+	</description>
+	<files>
+		<filename plugin="formscronjob">formscronjob.php</filename>
+		<filename>README.md</filename>
+		<filename>LICENSE</filename>
+        <folder>sql</folder>
+        <folder>layout</folder>
+	</files>
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.sql</file>
+        </sql>
+    </install>
+	<uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.sql</file>
+        </sql>
+    </uninstall>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+
+                <field name="key" type="text" default="" label="Chave para disparo" description="O cron precisa de uma chave para disparar, evite caracteres especiais, use letras e numeros e _" />
+
+				<field name="addtable"
+								 type="Repeatable"
+								 icon="list"
+								 description="Adicionar nome das tabelas e respectivos id de modulos"
+								 label="Adicionar tabelas"
+								 default="">
+								 <fields name="params">
+								 <fieldset hidden="true" name="addtable_modal" repeat="true">
+				<field
+					name="form_id"
+                    default="droide_formsid"
+					type="text"
+					label="Informe o id do formulário"
+					value_field="Informe o id do formulário informado no campo Form ID do modulo droide forms"
+					/>
+                <field name="layout" type="filelist" default="default" label="Selecione um layout" description="Layout de envio padrão pode ser customizado dentro da pasta layout do plugin" directory="plugins\system\formscronjob\layout" stripext='true'/>
+
+				 <field
+					 	 name = "emails"
+						 type = "textarea"
+						 default = ""
+						 label ="E-mails para disparo"
+						 description ="Informe os e-mails separados por ; para o envio do relatório"
+				 />
+                 <field name="assunto" type="text" default="Contato" label="Assunto para o e-mail" description="Assunto personalizado para o envio do e-mail" />
+
+                <field name="periodo_envio" type="list" default="" label="Select an option" description="Período de disparo">
+                        <option value="d">Diário</option>
+                		<option value="0">Domíngo</option>
+                        <option value="1">Segunda</option>
+                        <option value="2">Terça</option>
+                        <option value="3">Quarta</option>
+                        <option value="4">Quinta</option>
+                        <option value="5">Sexta</option>
+                        <option value="6">Sábado</option>
+                </field>
+			</fieldset>
+		</fields>
+				</field>
+
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>
