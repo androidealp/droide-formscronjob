@@ -20,5 +20,5 @@ index.php?cron_droideforms={key}
 
 | Version | Link |
 |---------|------|
-| v 0.1  | [download - v 0.1 - j3.8.x](https://github.com/androidealp/droide-formscronjob/archive/v0.1.zip) |
+| v 0.1  | [download - v 0.1 - j3.8.x](https://github.com/androidealp/droide-formscronjob/archive/v0.1.1.zip) |
 

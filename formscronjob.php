@@ -9,8 +9,6 @@
 
 defined('_JEXEC') or die ();
 
-
-
 class plgSystemFormscronjob extends JPlugin{
 
     private $forms_sended = [];
@@ -52,7 +50,10 @@ class plgSystemFormscronjob extends JPlugin{
         return $resultado;
     }
 
-
+   /**
+    * o processo trata de disparo inicia após a rota de urls
+    * @author André Luiz Pereira <andre@next4.com.br>
+    */
     public function onAfterRoute()
     {
 
@@ -83,7 +84,12 @@ class plgSystemFormscronjob extends JPlugin{
 
         
     }
-
+    /**
+     * verica os dados para o disparo
+    * @param  array $parans - array com os atributos vindos do repeteable já tratados
+    * @return bool verdadeiro ou falso para o disparo e trata a variavel forms_sended com o conteúdo de e-mail 
+    * @author André Luiz Pereira <andre@next4.com.br>
+    */
     private function checkDisparo($parans)
     {
 
@@ -133,7 +139,12 @@ class plgSystemFormscronjob extends JPlugin{
 
     }
 
-
+    /**
+     * verica se o item está no periodo
+     * @param  array $val - array o periodo está entre diário e dias da semana, 'w' do php
+     * @return bool verdadeiro ou falso 
+     * @author André Luiz Pereira <andre@next4.com.br>
+     */
     public function checkPeriod($val)
     {
         $dia_da_semana = date('w');
@@ -147,6 +158,10 @@ class plgSystemFormscronjob extends JPlugin{
 
     }
 
+    /**
+     * Dispara e registra no banco
+     * @author André Luiz Pereira <andre@next4.com.br>
+     */
     private function disparar()
     {
 
@@ -211,18 +226,17 @@ class plgSystemFormscronjob extends JPlugin{
 
                      }
 
-                     
-                       
-                            
-
-
                 }
 
     }
 
 
 
-
+    /**
+     * recupera o layout com as variaveis tratadas para disparo
+     * @return 
+     * @author André Luiz Pereira <andre@next4.com.br>
+     */
     private function getLayout($layout)
     {
 
